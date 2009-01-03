@@ -18,10 +18,10 @@ Examples
 Here a fully example of use of this library. Even if I use the Python doctest format, this isn't a
 politically correct test because I wait for user input and no real tests are done on the results.
 
-Maybe somday I'll fix this!
+Maybe someday I'll fix this!
 
-However the code in this page is a working example. If you know nothing od doctest, only know that you can
-run this code simple typing:
+However the code in this page is a working example. If you know nothing about doctests, only know that you can
+run this code simple accessing at the egg source and type:
 
    python tests.py
 
