@@ -10,6 +10,9 @@ LL_CUT = "cut"
 LL_SPLIT = "split"
 LL_OVERFLOW = "overflow"
 
+PL_OVERFLOW = "overflow"
+PL_CUT = "cut"
+
 class KTextSurfaceWriter(object):
     """Generate a text displayed inside a given pygame.Rect.
     You can change/choose font size and color, and can fill the surface part.
@@ -28,6 +31,7 @@ class KTextSurfaceWriter(object):
         self.justify_chars = justify_chars
         self._mustClear = True
         self.line_length_criteria = LL_CUT
+        self.page_length_criteria = PL_OVERFLOW
 
     def _setText(self, text):
         self._text = text
@@ -79,17 +83,17 @@ class KTextSurfaceWriter(object):
                     continue
             elif line_length_criteria.lower()==LL_OVERFLOW:
                 # Word too long is not changed, so draw outside the defined rect
+                txt1 = " ".join(words)
                 if cls.wordTooLong(word, font, max_length, justify_chars=justify_chars):
-                    print words
-                    print words_removed
-                    print word
                     words_removed.reverse()
-                    txt1 = " ".join(words)
                     txt2 = (" "*justify_chars) + " ".join(words_removed)
                     if font.size(txt2)[0]<=max_length:
-                        return [txt1, (" "*justify_chars) + word, txt2]
+                        return cls.normalizeTextLength(txt1, font, max_length, justify_chars=justify_chars) + \
+                               [(" "*justify_chars) + word, txt2]
                     else:
-                        return [txt1, (" "*justify_chars) + word] + cls.normalizeTextLength(txt2, font, max_length, justify_chars=justify_chars)
+                        return cls.normalizeTextLength(txt1, font, max_length, justify_chars=justify_chars) + \
+                               [(" "*justify_chars) + word] + \
+                               cls.normalizeTextLength(txt2, font, max_length, justify_chars=justify_chars)
             else:
                 raise ValueError("Invalid line_length_criteria value: %s" % line_length_criteria)
             words_removed.append(word)
@@ -124,8 +128,24 @@ class KTextSurfaceWriter(object):
             else:
                 newtextlines = [line,]
             resultPage.extend(newtextlines)
+        if self.page_length_criteria==PL_CUT:
+            resultPage = self._shortDownPage(resultPage)
         self._resultPage = resultPage
         return resultPage
+
+    def _shortDownPage(self, page, start_from_line=0):
+        """If the page is too tall with the current font, this method will
+        remove as many lines as needed to fith the text inside the
+        constraint rect
+        @page: the list of lines text
+        @start_from_line: use this to not keep the page from the beginning
+        @return: the page parameter without the not needed lines.
+        """
+        ln = len(page)
+        while ln*self.font.get_height()>self.rect.height:
+            page.pop()
+            ln = len(page)
+        return page
 
     def clear(self, surface, fillcolor=None):
         """Clear the subsurface with the fillcolor choosen"""
