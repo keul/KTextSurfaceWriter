@@ -58,7 +58,7 @@ So we can call it for the first time.
    >>> blitSurface()
 
 This is a graphical test, so we need to delay the drawing and make possible that user can look at results and then go over.
-We wait for user input before going on. To do this we create a second  silly function that we'll call often later.
+We wait for user input before going on. To do this we create a second silly function that we'll call often later.
 
    >>> def waitForUserAction():
    ...     while True:
