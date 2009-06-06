@@ -256,7 +256,7 @@ TODO
 ====
 
  * A way to scroll a too (vertically) long text.
- * Split PyGame logic fron pure text algorithms.
+ * Split PyGame logic from pure text algorithms.
 
 Subversion and other
 ====================
