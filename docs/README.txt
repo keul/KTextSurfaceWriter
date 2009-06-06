@@ -94,8 +94,8 @@ Now we will load the text inside the KTextSurfaceWriter, but before this we (obv
 
 Now the text.
 
-   >>> import example_texts
-   >>> ktext.text = example_texts.EXAMPLE_TEXT_1
+   >>> EXAMPLE_TEXT_1 = """Lorem ipsum dolor sit amet, consectetur adipiscing elit"""
+   >>> ktext.text = EXAMPLE_TEXT_1
 
 Now some color for a better display experience
 
@@ -117,7 +117,10 @@ Simple (but longer) text drawing
 The text above is very short so we didn't tested all the KTextSurfaceWriter features right now.
 Lets try with a longer ones...
 
-   >>> ktext.text = example_texts.EXAMPLE_TEXT_2
+   >>> EXAMPLE_TEXT_2 = ("""Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur purus lorem, sollicitudin in, """
+   ... """vehicula ut, eleifend at, nibh. Sed vel sapien sed neque congue tincidunt. Class aptent taciti sociosqu """
+   ... """ad litora torquent per conubia nostra, per inceptos himenaeos""")
+   >>> ktext.text = EXAMPLE_TEXT_2
    
 Now we can immediatly test this new text.
 
@@ -130,7 +133,13 @@ the constrain pygame.Rect instance we used!
 
 And what is the text will be already splitted on several lines?
 
-   >>> ktext.text = example_texts.EXAMPLE_TEXT_3
+   >>> EXAMPLE_TEXT_3 = ("""Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n"""
+   ... """Fusce porta ipsum quis velit. Fusce sagittis tincidunt nisl. Proin ipsum ipsum, laoreet eu, volutpat eget, """
+   ... """blandit in, lectus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\n"""
+   ... """Phasellus quis erat sit amet augue dictum convallis. Morbi ultricies, ipsum eu vulputate auctor, risus sem """
+   ... """elementum ipsum, vitae tempor massa neque vitae lectus. Nullam nulla. Etiam volutpat libero vel lacus. """
+   ... """Nullam sit amet arcu ac quam interdum consectetur. In varius.""")
+   >>> ktext.text = EXAMPLE_TEXT_3
    >>> ktext.draw(surface)
    >>> blitSurface()
    >>> waitForUserAction()
@@ -163,7 +172,11 @@ big as the entire surface, is always possible that the text we pass is too long.
 
 What happen in this case?
 
-   >>> ktext.text = example_texts.EXAMPLE_TEXT_4
+   >>> EXAMPLE_TEXT_4 = ("""Pygame is a set of Python modules designed for writing games. Pygame adds functionality on top of the excellent """
+   ... """SDL library. This allows you to create fully featured games and multimedia programs in the python language. """
+   ... """PygameishighlyportableandrunsonnearlyeveryplatformandoperatingsystemPygameitselfhasbeendownloadedmillionsof"""
+   ... """timesandhashad millions of visits to its website.""")
+   >>> ktext.text = EXAMPLE_TEXT_4
    >>> ktext.draw(surface)
    >>> blitSurface()
    >>> waitForUserAction()

@@ -3,8 +3,8 @@
 import pygame
 
 __author__ = "Keul - lucafbb AT gmail.com"
-__version__ = "0.1.0"
-__description__ = "A PyGame addon for display text over surface with many dimension bounds"
+__version__ = "0.2.0"
+__description__ = "A Pygame addon for display text over surface with many dimension bounds"
 
 LL_CUT = "cut"
 LL_SPLIT = "split"
